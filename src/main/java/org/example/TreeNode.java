@@ -49,7 +49,11 @@ public class TreeNode {
                     bracketCounter--;
                     //если счётчик обнулился, строим дерево по полученной строке
                     if (bracketCounter == 0) {
-                        prefix.append("  ");
+                        //проверяем, есть ли после узла ещё элементы
+                        if (i + 1 < input.length() && input.charAt(i + 1) == ',')
+                            prefix.append("| ");
+                        else
+                            prefix.append("  ");
                         parseTree(newNode.toString());
                         newNode.setLength(0);
                     } else
@@ -69,7 +73,7 @@ public class TreeNode {
                 System.out.print(ch);
         }
 
-        if(!prefix.isEmpty())
+        if (!prefix.isEmpty())
             prefix.setLength(prefix.length() - 2);
 
         return null;
