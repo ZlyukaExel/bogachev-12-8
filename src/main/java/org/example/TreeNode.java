@@ -56,25 +56,24 @@ public class TreeNode {
             return new TreeNode(input);
     }
 
-
     public static StringBuilder prefix = new StringBuilder();
-/*
+
     public static void PrintTree(TreeNode tree) {
         System.out.println(tree.value);
         for (TreeNode child : tree.children) {
             prefix.setLength(0);
-            prefix.append("+-");
-            PrintChildren(child);
+            PrintChildren(child, false);
         }
-        prefix.setLength(prefix.length() - 2);
     }
-  */
-    public static void PrintChildren(TreeNode tree){
-        System.out.print(prefix.toString());
-        System.out.println(tree.value);
-        prefix.append("  ");
-        for (TreeNode child : tree.children) {
-            PrintChildren(child);
+
+    public static void PrintChildren(TreeNode tree, boolean isLast) {
+        System.out.println(prefix.toString() + "+-" + tree.value);
+        if (isLast)
+            prefix.append("  ");
+        else
+            prefix.append("| ");
+        for (int i = 0; i < tree.children.size(); i++) {
+            PrintChildren(tree.children.get(i), i == (tree.children.size() - 1));
         }
         prefix.setLength(prefix.length() - 2);
     }
@@ -84,17 +83,15 @@ public class TreeNode {
         TreeNode root1 = makeTree(input1);
         PrintTree(root1);
 
-        System.out.println();
-        System.out.println();
+        System.out.println("\n");
 
         String input2 = "(a, second, (abc, y, (x, 7), uuu, (8, 9, (10, 1))), abcddcba)";
         TreeNode root2 = makeTree(input2);
         PrintTree(root2);
 
-        System.out.println();
-        System.out.println();
+        System.out.println("\n");
 
-        String input3 = "(a, (b, (c, (d, (e, (f, (g, (h, (i, (j, (k, (l, (m, (n, (o, (p))))))))))))))), z)";
+        String input3 = "(a, (b, (c, (d, (e, (f, (g, (h, (i, (j, (k, (l, (m, (n, (o, (p)))))), x))))), y)))), z)";
         TreeNode root3 = makeTree(input3);
         PrintTree(root3);
     }
