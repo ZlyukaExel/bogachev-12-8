@@ -60,9 +60,9 @@ public class TreeNode {
 
     public static void PrintTree(TreeNode tree) {
         System.out.println(tree.value);
-        for (TreeNode child : tree.children) {
+        for (int i = 0; i < tree.children.size(); i++) {
             prefix.setLength(0);
-            PrintChildren(child, false);
+            PrintChildren(tree.children.get(i), i == tree.children.size() - 1);
         }
     }
 
@@ -73,7 +73,7 @@ public class TreeNode {
         else
             prefix.append("| ");
         for (int i = 0; i < tree.children.size(); i++) {
-            PrintChildren(tree.children.get(i), i == (tree.children.size() - 1));
+            PrintChildren(tree.children.get(i), i == tree.children.size() - 1);
         }
         prefix.setLength(prefix.length() - 2);
     }
@@ -94,5 +94,11 @@ public class TreeNode {
         String input3 = "(a, (b, (c, (d, (e, (f, (g, (h, (i, (j, (k, (l, (m, (n, (o, (p)))))), x))))), y)))), z)";
         TreeNode root3 = makeTree(input3);
         PrintTree(root3);
+
+        System.out.println("\n");
+
+        String input4 = "(a, (b, (c, (d, (e, (f, (g, (h, (i, (j, (k, (l, (m, (n, (o, (p)))))), x))))), y)))))";
+        TreeNode root4 = makeTree(input4);
+        PrintTree(root4);
     }
 }
